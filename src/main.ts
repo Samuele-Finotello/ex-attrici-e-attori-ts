@@ -91,3 +91,19 @@ async function getAllActresses(): Promise<Actress[]> {
     return [];
   }
 }
+
+// MILESTONE 5
+async function getActresses(ids: number[]): Promise<(Actress | null)[]> {
+  try {
+    const promises = ids.map(id => getActress(id))
+    return await Promise.all(promises);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('Errore nel recupero delle attrici: ', error)
+    }
+    else {
+      console.error('Errore sconosciuto ', error)
+    }
+    return [];
+  }
+}

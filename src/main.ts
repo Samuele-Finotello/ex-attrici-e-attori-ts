@@ -212,7 +212,7 @@ async function getAllActors(): Promise<Actor[]> {
   }
 }
 
-async function getActors(ids: number[]): Promise<(Actors | null)[]> {
+async function getActors(ids: number[]): Promise<(Actor | null)[]> {
   try {
     const promises = ids.map(id => getActor(id))
     return await Promise.all(promises)

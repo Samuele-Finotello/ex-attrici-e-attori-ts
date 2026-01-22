@@ -246,3 +246,16 @@ function updateActor(actor: Actor, updates: Partial<Actor>): Actor {
     }
   )
 }
+
+// BONUS 3
+async function createRandomCouple(): Promise<[Actress, Actor] | null> {
+  const [actresses, actors] = await Promise.all([getAllActresses(), getAllActors()])
+  if (actresses.length === 0 || actors.length === 0) {
+    return null;
+  }
+  const randomActress = actresses[Math.floor(Math.random() * actresses.length)]
+  const randomActor = actors[Math.floor(Math.random() * actors.length)]
+  return [randomActress, randomActor];
+}
+
+console.log(createRandomCouple())

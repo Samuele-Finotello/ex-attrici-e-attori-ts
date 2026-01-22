@@ -29,16 +29,22 @@ type Actress = Person & {
 }
 
 // MILESTONE 3
-const actressesNationalities = ['American', 'British', 'Australian', 'Israeli-American', 'South African', 'French', 'Indian', 'Israeli', 'Spanish', 'South Korean', 'Chinese']
-
-function isActress(dati: unknown): dati is Actress {
+function isPerson(dati: unknown): dati is Person {
   return (
     typeof dati === 'object' && dati !== null &&
     'id' in dati && typeof dati.id === 'number' &&
     'name' in dati && typeof dati.name === 'string' &&
     'birth_year' in dati && typeof dati.birth_year === 'number' &&
     'biography' in dati && typeof dati.biography === 'string' &&
-    'image' in dati && typeof dati.image === 'string' &&
+    'image' in dati && typeof dati.image === 'string'
+  )
+}
+
+const actressesNationalities = ['American', 'British', 'Australian', 'Israeli-American', 'South African', 'French', 'Indian', 'Israeli', 'Spanish', 'South Korean', 'Chinese']
+
+function isActress(dati: unknown): dati is Actress {
+  return (
+    isPerson(dati) &&
     'most_famous_movies' in dati &&
     dati.most_famous_movies instanceof Array &&
     dati.most_famous_movies.length === 3 &&
@@ -149,12 +155,7 @@ type Actor = Person & {
 
 function isActor(dati: unknown): dati is Actor {
   return (
-    typeof dati === 'object' && dati !== null &&
-    'id' in dati && typeof dati.id === 'number' &&
-    'name' in dati && typeof dati.name === 'string' &&
-    'birth_year' in dati && typeof dati.birth_year === 'number' &&
-    'biography' in dati && typeof dati.biography === 'string' &&
-    'image' in dati && typeof dati.image === 'string' &&
+    isPerson(dati) &&
     'known_for' in dati &&
     dati.known_for instanceof Array &&
     dati.known_for.length === 3 &&
